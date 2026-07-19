@@ -1,3 +1,12 @@
+--
+title: Weather Assistant AI
+emoji: ???
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+--
+
 # Weather Assistant AI
 
 ## Project Overview
@@ -98,3 +107,4 @@ MIT License
 
 ## Author
 Hafiza Amna
+
