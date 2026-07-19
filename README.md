@@ -108,3 +108,6 @@ MIT License
 ## Author
 Hafiza Amna
 
+
+## Live Demo
+- [Hugging Face Space](https://huggingface.co/spaces/1Hafiza-Amna7/weather-assistant-ai)
