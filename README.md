@@ -1,10 +1,11 @@
----title: Weather Assistant AI
-emoji: ???
+---
+title: Weather Assistant AI
+emoji: 🌤️
 colorFrom: blue
 colorTo: green
 sdk: docker
 pinned: false
---
+---
 
 # Weather Assistant AI
 
