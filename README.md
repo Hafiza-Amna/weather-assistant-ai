@@ -58,7 +58,17 @@ Then, open your browser and navigate to the printed Dev UI URL (e.g. `http://127
 In the ADK Dev UI chat, you can ask:
 - *"What is the weather in Faisalabad?"*
 - *"Tell me the time in London."*
-- *"What's the weather like in San Francisco?"*
+- *"What's the weather like in Tokyo?"*
+- *"What time is it in New York?"*
+- *"What is the current time in Sydney?"*
+
+### Supported Cities for `get_weather`
+Faisalabad, Lahore, Karachi, Islamabad, San Francisco, New York, London, Tokyo, Paris, Berlin, Sydney, Dubai, Mumbai, Beijing.
+Any other city returns a generic fallback response.
+
+### Supported Cities for `get_current_time`
+San Francisco, Los Angeles, New York, Chicago, London, Paris, Berlin, Istanbul, Moscow, Dubai, Faisalabad/Pakistan, Mumbai/India, Beijing, Tokyo, Sydney, Singapore, Hong Kong, Seoul.
+Unrecognised cities return a helpful list of supported locations.
 
 ## Project Structure
 ```

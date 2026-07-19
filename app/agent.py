@@ -87,30 +87,65 @@ def get_weather(city: str) -> str:
         return "It's 72°F (22°C) and partly cloudy in New York."
     if "london" in q:
         return "It's 59°F (15°C) and overcast with light rain in London."
+    if "tokyo" in q:
+        return "It's 86°F (30°C) and warm with clear skies in Tokyo."
+    if "paris" in q:
+        return "It's 68°F (20°C) and partly cloudy in Paris."
+    if "berlin" in q:
+        return "It's 64°F (18°C) and mostly cloudy in Berlin."
+    if "sydney" in q:
+        return "It's 61°F (16°C) and clear in Sydney."
+    if "dubai" in q:
+        return "It's 104°F (40°C) and sunny in Dubai."
+    if "mumbai" in q or "bombay" in q:
+        return "It's 88°F (31°C) and humid with partly cloudy skies in Mumbai."
+    if "beijing" in q:
+        return "It's 86°F (30°C) and hazy in Beijing."
     return f"It's 86°F (30°C) and sunny in {city.title()}."
 
 
 def get_current_time(city: str) -> str:
     """Return the current local time for the given city."""
+    # Map of city keywords to IANA timezone IDs
+    CITY_TIMEZONES = [
+        (("sf", "san francisco"),                                        "America/Los_Angeles"),
+        (("new york", "nyc"),                                            "America/New_York"),
+        (("chicago",),                                                   "America/Chicago"),
+        (("los angeles", " la"),                                         "America/Los_Angeles"),
+        (("london",),                                                    "Europe/London"),
+        (("paris",),                                                     "Europe/Paris"),
+        (("berlin",),                                                    "Europe/Berlin"),
+        (("istanbul",),                                                  "Europe/Istanbul"),
+        (("moscow",),                                                    "Europe/Moscow"),
+        (("dubai",),                                                     "Asia/Dubai"),
+        (("faisalabad", "lahore", "islamabad", "karachi", "pakistan"),   "Asia/Karachi"),
+        (("mumbai", "bombay", "delhi", "india"),                         "Asia/Kolkata"),
+        (("beijing", "shanghai", "china"),                               "Asia/Shanghai"),
+        (("tokyo", "japan"),                                             "Asia/Tokyo"),
+        (("sydney", "melbourne", "australia"),                           "Australia/Sydney"),
+        (("singapore",),                                                 "Asia/Singapore"),
+        (("hong kong",),                                                 "Asia/Hong_Kong"),
+        (("seoul",),                                                     "Asia/Seoul"),
+    ]
+
     q = city.lower()
-    if "sf" in q or "san francisco" in q:
-        tz_id = "America/Los_Angeles"
-    elif "new york" in q or "nyc" in q:
-        tz_id = "America/New_York"
-    elif "london" in q:
-        tz_id = "Europe/London"
-    elif any(c in q for c in ("faisalabad", "lahore", "islamabad", "karachi", "pakistan")):
-        tz_id = "Asia/Karachi"
-    elif "dubai" in q:
-        tz_id = "Asia/Dubai"
-    elif "tokyo" in q:
-        tz_id = "Asia/Tokyo"
-    else:
+    tz_id = None
+    for keywords, timezone in CITY_TIMEZONES:
+        if any(kw in q for kw in keywords):
+            tz_id = timezone
+            break
+
+    if tz_id is None:
+        supported = (
+            "San Francisco, New York, Chicago, London, Paris, Berlin, Istanbul, "
+            "Moscow, Dubai, Faisalabad/Pakistan, Mumbai/India, Beijing, Tokyo, "
+            "Sydney, Singapore, Hong Kong, Seoul"
+        )
         return (
             f"Sorry, I don't have timezone data for '{city}'. "
-            "I can look up: San Francisco, New York, London, "
-            "Faisalabad/Pakistan, Dubai, or Tokyo."
+            f"Supported cities: {supported}."
         )
+
     tz = ZoneInfo(tz_id)
     now = datetime.datetime.now(tz)
     return f"The current time in {city.title()} is {now.strftime('%Y-%m-%d %H:%M:%S %Z')} ({tz_id})."
