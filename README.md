@@ -1,5 +1,4 @@
---
-title: Weather Assistant AI
+---title: Weather Assistant AI
 emoji: ???
 colorFrom: blue
 colorTo: green
